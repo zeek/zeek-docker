@@ -1,0 +1,17 @@
+#!/bin/bash -e
+VER=$1
+URL=$2
+
+echo VER is $VER
+echo URL is $URL
+
+cd /tmp/
+if [ ! -e bro-${VER}.tar.gz ] ; then 
+    wget -c $URL
+fi
+if [ ! -d bro-${VER} ]; then
+    tar xvzf bro-${VER}.tar.gz
+fi
+cd bro-${VER}
+./configure --prefix=/usr/local/bro-${VER} --disable-broctl
+make -j4 install
