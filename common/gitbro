@@ -1,0 +1,13 @@
+#!/bin/bash -e
+VER=$1
+
+cd bro
+git pull
+git checkout $VER
+git reset --hard
+git submodule foreach --recursive git reset --hard
+git checkout .
+git submodule foreach --recursive git checkout .
+./configure --prefix=/usr/local/bro-master
+make
+make install

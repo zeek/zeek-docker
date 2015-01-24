@@ -1,6 +1,8 @@
 #!/bin/sh -e 
 echo "2015-01-23"
 
+mkdir -p /usr/share/GeoIP/
+
 wget -N http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz
 zcat GeoLiteCity.dat.gz > GeoIP.dat.new
 mv GeoIP.dat.new /usr/share/GeoIP/GeoIPCity.dat
