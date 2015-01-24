@@ -14,4 +14,11 @@ if [ ! -d bro-${VER} ]; then
 fi
 cd bro-${VER}
 ./configure --prefix=/usr/local/bro-${VER} --disable-broctl
-make -j4 install
+#This seems to fail sometimes, so retry a few times
+make || true
+make || true
+make || true
+make || true
+make || true
+make
+make install
