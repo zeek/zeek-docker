@@ -2,7 +2,7 @@
 #
 # VERSION               0.1
 
-FROM google/debian:wheezy
+FROM debian:squeeze
 MAINTAINER Justin Azoff <justin.azoff@gmail.com>
 
 ENV WD /scratch
@@ -18,10 +18,10 @@ RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl-dev
 # Bro < 2.3 needs libmagic and ./configure wants the file command
 RUN apt-get -y install file libmagic-dev
 
-ENV VER 1.5
 # Build bro
+ENV VER 1.5
+RUN cd /tmp && wget http://www.bro.org/downloads/archive/bro-${VER}.tar.gz --no-check-certificate
 ADD ./common/buildbro-1.5 ${WD}/common/buildbro-1.5
-RUN cd /tmp && wget http://www.bro.org/downloads/archive/bro-${VER}.tar.gz
 RUN ${WD}/common/buildbro-1.5 ${VER} http://www.bro.org/downloads/archive/bro-${VER}.tar.gz
 
 RUN ln -s /usr/local/bro-${VER} /bro
