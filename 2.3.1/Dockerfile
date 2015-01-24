@@ -3,17 +3,20 @@
 # VERSION               0.1
 FROM bro:build
 
-ENV VER = 2.3.1
+ENV VER 2.3.1
+ENV WD /workspace
 
 MAINTAINER Justin Azoff <justin.azoff@gmail.com>
 
-ADD ../common/buildbro ./buildbro
-RUN ./buildbro ${VER} http://www.bro.org/downloads/release/bro-${VER}.tar.gz
-RUN ln -s /usr/local/bro-${VER} /bro
-ADD ../common/bro_profile.sh /etc/profile.d/bro.sh
+RUN mkdir ${WD}
 
-ADD getgeo.sh /getgeo.sh
-RUN /getgeo.sh
+WORKDIR /workspace
 
-ADD ./inner
-CMD docker build -t bro:2.3.1 inner/
+ADD ./common/buildbro ${WD}/common/buildbro
+RUN ${WD}/common/buildbro ${VER} http://www.bro.org/downloads/release/bro-${VER}.tar.gz
+
+ADD ./inner ${WD}/inner
+ADD ./common ${WD}/inner/common
+
+RUN mv /usr/local/bro-${VER} ${WD}/inner/
+CMD docker build -t bro:2.3.1 /workspace/inner/
