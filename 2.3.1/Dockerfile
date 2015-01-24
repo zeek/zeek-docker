@@ -5,7 +5,6 @@
 FROM google/debian:wheezy
 MAINTAINER Justin Azoff <justin.azoff@gmail.com>
 
-ENV VER 2.3.1
 ENV WD /scratch
 
 RUN mkdir ${WD}
@@ -17,6 +16,7 @@ RUN apt-get update && echo 2015-01-23
 RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl-dev libgeoip-dev libpcap-dev python-dev libcurl4-openssl-dev wget libncurses5-dev ca-certificates --no-install-recommends
 
 # Build bro
+ENV VER 2.3.1
 ADD ./common/buildbro ${WD}/common/buildbro
 RUN ${WD}/common/buildbro ${VER} http://www.bro.org/downloads/release/bro-${VER}.tar.gz
 RUN ln -s /usr/local/bro-${VER} /bro

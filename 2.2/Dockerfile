@@ -5,7 +5,6 @@
 FROM google/debian:wheezy
 MAINTAINER Justin Azoff <justin.azoff@gmail.com>
 
-ENV VER 2.2
 ENV WD /scratch
 
 RUN mkdir ${WD}
@@ -16,10 +15,11 @@ RUN dpkg -l | awk '{print $2}' | sort > old.txt
 RUN apt-get update && echo 2015-01-23
 RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl-dev libgeoip-dev libpcap-dev python-dev libcurl4-openssl-dev wget libncurses5-dev ca-certificates --no-install-recommends
 
-#Docker < 2.3 needs libmagic and ./configure wants the file command
+# Bro < 2.3 needs libmagic and ./configure wants the file command
 RUN apt-get -y install file libmagic-dev
 
 # Build bro
+ENV VER 2.2
 ADD ./common/buildbro ${WD}/common/buildbro
 RUN ${WD}/common/buildbro ${VER} http://www.bro.org/downloads/archive/bro-${VER}.tar.gz
 RUN ln -s /usr/local/bro-${VER} /bro

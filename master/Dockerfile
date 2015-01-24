@@ -5,7 +5,6 @@
 FROM google/debian:wheezy
 MAINTAINER Justin Azoff <justin.azoff@gmail.com>
 
-ENV VER 2.3.1
 ENV WD /scratch
 
 RUN mkdir ${WD}
