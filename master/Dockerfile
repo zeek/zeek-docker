@@ -20,7 +20,7 @@ RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl-dev
 # Build bro
 RUN git clone --recursive git://git.bro.org/bro
 ADD ./common/gitbro ${WD}/common/gitbro
-RUN ${WD}/common/gitbro 4d0a09a0379206f0cacd0c8a8053c0d1070ca62b
+RUN ${WD}/common/gitbro 6fa03abdbc14e5e5fc85d95f9f1eeeebc8987412
 RUN ln -s /usr/local/bro-master /bro
 
 # Final setup stuff
