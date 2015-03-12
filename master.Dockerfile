@@ -2,7 +2,7 @@
 #
 # VERSION               0.1
 
-FROM google/debian:wheezy
+FROM debian:wheezy
 MAINTAINER Justin Azoff <justin.azoff@gmail.com>
 
 ENV WD /scratch
