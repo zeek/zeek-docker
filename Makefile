@@ -1,15 +1,9 @@
-all:
-	cp -al common 1.5
-	$(MAKE) -C 1.5
+all: $(patsubst %.Dockerfile,squash-stamp_%,$(wildcard *.Dockerfile))
 
-	cp -al common 2.1
-	$(MAKE) -C 2.1
+build-stamp_%: %.Dockerfile
+	docker build -t bro:$(*)_fat -f $<
+	touch $@
 
-	cp -al common 2.2
-	$(MAKE) -C 2.2
-
-	cp -al common 2.3.1
-	$(MAKE) -C 2.3.1
-
-	cp -al common master
-	$(MAKE) -C master
+squash-stamp_%: build-stamp_%
+	docker save bro:$(*)_fat | sudo docker-squash -t bro:$(*) | docker load
+	touch $@
