@@ -40,4 +40,6 @@ RUN apt-get -y remove --purge $(comm -13 old.txt  new.txt|grep -- -dev)
 RUN apt-get -y remove --purge $(comm -13 old.txt  new.txt|grep -v lib|grep -v ca-certificates|grep -v wget)
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /scratch/*
 
+env PATH /bro/bin/:$PATH
+
 CMD /bin/bash -l
