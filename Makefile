@@ -7,3 +7,9 @@ build-stamp_%: %.Dockerfile
 squash-stamp_%: build-stamp_%
 	docker save broplatform/bro:$(*)_fat | sudo docker-squash -t broplatform/bro:$(*) | docker load
 	touch $@
+
+push-stamp_%: squash-stamp_%
+	docker push broplatform/bro:$(*)
+	touch $@
+
+push_all: $(patsubst %.Dockerfile,push-stamp_%,$(wildcard *.Dockerfile))
