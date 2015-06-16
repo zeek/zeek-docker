@@ -12,7 +12,7 @@ WORKDIR /scratch
 
 RUN dpkg -l | awk '{print $2}' | sort > old.txt
 
-RUN apt-get update && echo 2015-01-23
+RUN apt-get update && apt-get upgrade && echo 2015-06-16
 RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl-dev libgeoip-dev libpcap-dev python-dev libcurl4-openssl-dev wget libncurses5-dev ca-certificates --no-install-recommends
 
 # Bro < 2.3 needs libmagic and ./configure wants the file command

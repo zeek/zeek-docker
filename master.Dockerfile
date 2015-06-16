@@ -12,7 +12,7 @@ WORKDIR /scratch
 
 RUN dpkg -l | awk '{print $2}' | sort > old.txt
 
-RUN apt-get update && echo 2015-01-23
+RUN apt-get update && apt-get upgrade && echo 2015-06-16
 RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl-dev libgeoip-dev libpcap-dev python-dev libcurl4-openssl-dev wget libncurses5-dev ca-certificates --no-install-recommends
 
 #Checkout bro
@@ -20,7 +20,7 @@ RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl-dev
 # Build bro
 RUN git clone --recursive git://git.bro.org/bro
 ADD ./common/gitbro ${WD}/common/gitbro
-RUN ${WD}/common/gitbro 501dc821bf60a16051add9d86eec0e7fffe867ec
+RUN ${WD}/common/gitbro 8be8f2e725c296fffda52a542faacb63aaddb517
 RUN ln -s /usr/local/bro-master /bro
 
 # Final setup stuff
