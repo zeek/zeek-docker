@@ -7,6 +7,7 @@ git checkout $VER
 git reset --hard
 git submodule foreach --recursive git reset --hard
 git checkout .
+git submodule foreach --recursive git submodule update
 git submodule foreach --recursive git checkout .
 ./configure --prefix=/usr/local/bro-master
 make
