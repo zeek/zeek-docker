@@ -2,7 +2,7 @@
 #
 # VERSION               0.1
 
-FROM debian:jessie
+FROM debian:stretch
 MAINTAINER Justin Azoff <justin.azoff@gmail.com>
 
 ENV WD /scratch
@@ -12,7 +12,7 @@ WORKDIR /scratch
 
 RUN dpkg -l | awk '{print $2}' | sort > old.txt
 
-RUN apt-get update && apt-get upgrade -y && echo 2016-05-13
+RUN apt-get update && apt-get upgrade -y && echo 2016-07-08
 RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl-dev libgeoip-dev libpcap-dev python-dev libcurl4-openssl-dev wget libncurses5-dev ca-certificates --no-install-recommends
 
 #Checkout bro
@@ -22,7 +22,7 @@ RUN git clone --recursive git://git.bro.org/bro
 ADD ./common/install-caf ${WD}/common/install-caf
 ADD ./common/gitbro ${WD}/common/gitbro
 RUN ${WD}/common/install-caf 0.14.4
-RUN ${WD}/common/gitbro 49ca47895db45e03b9ab918292af6d525c42f94e
+RUN ${WD}/common/gitbro 75e3f9bc69b5344379689a5a3e7f3602546672be
 RUN ln -s /usr/local/bro-master /bro
 
 # Final setup stuff
