@@ -12,7 +12,7 @@ WORKDIR /scratch
 
 RUN dpkg -l | awk '{print $2}' | sort > old.txt
 
-RUN apt-get update && apt-get upgrade -y && echo 2016-07-08
+RUN apt-get update && apt-get upgrade -y && echo 2016-10-06
 RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl-dev libgeoip-dev libpcap-dev python-dev libcurl4-openssl-dev wget libncurses5-dev ca-certificates --no-install-recommends
 
 #Checkout bro
@@ -22,7 +22,7 @@ RUN git clone --recursive git://git.bro.org/bro
 ADD ./common/install-caf ${WD}/common/install-caf
 ADD ./common/gitbro ${WD}/common/gitbro
 RUN ${WD}/common/install-caf 0.14.4
-RUN ${WD}/common/gitbro 75e3f9bc69b5344379689a5a3e7f3602546672be
+RUN ${WD}/common/gitbro 89ff11ba9101a7dff3359dbe74ddc4a6d7633fdd
 RUN ln -s /usr/local/bro-master /bro
 
 # Final setup stuff
