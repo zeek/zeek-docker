@@ -5,7 +5,6 @@ wget github.com/actor-framework/actor-framework/archive/${ver}.tar.gz -O caf-${v
 tar xzf caf-${ver}.tar.gz
 rm caf-${ver}.tar.gz
 
-yum install -y cmake gcc-c++
 cd actor-framework-${ver} && ./configure --prefix=/usr/local && make install
 cd ..
 rm -rf actor-framework-${ver}
