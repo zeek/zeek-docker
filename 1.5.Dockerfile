@@ -20,9 +20,9 @@ RUN apt-get -y install file libmagic-dev
 
 # Build bro
 ENV VER 1.5
-RUN cd /tmp && wget http://www.bro.org/downloads/archive/bro-${VER}.tar.gz --no-check-certificate
+RUN cd /tmp && wget http://www.bro.org/downloads/bro-${VER}.tar.gz --no-check-certificate
 ADD ./common/buildbro-1.5 ${WD}/common/buildbro-1.5
-RUN ${WD}/common/buildbro-1.5 ${VER} http://www.bro.org/downloads/archive/bro-${VER}.tar.gz
+RUN ${WD}/common/buildbro-1.5 ${VER} http://www.bro.org/downloads/bro-${VER}.tar.gz
 
 RUN ln -s /usr/local/bro-${VER} /bro
 

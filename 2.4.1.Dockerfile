@@ -18,7 +18,7 @@ RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl-dev
 # Build bro
 ENV VER 2.4.1
 ADD ./common/buildbro ${WD}/common/buildbro
-RUN ${WD}/common/buildbro ${VER} http://www.bro.org/downloads/release/bro-${VER}.tar.gz
+RUN ${WD}/common/buildbro ${VER} http://www.bro.org/downloads/bro-${VER}.tar.gz
 RUN ln -s /usr/local/bro-${VER} /bro
 
 # Final setup stuff
