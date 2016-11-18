@@ -4,8 +4,9 @@ build-stamp_%: %.Dockerfile
 	docker build -t broplatform/bro:$(*)_fat -f $< . 
 	touch $@
 
+# https://github.com/goldmann/docker-squash/
 squash-stamp_%: build-stamp_%
-	docker save broplatform/bro:$(*)_fat | sudo docker-squash -t broplatform/bro:$(*) | docker load
+	docker-squash -t broplatform/bro:$(*) broplatform/bro:$(*)_fat
 	touch $@
 
 push-stamp_%: squash-stamp_%
