@@ -13,7 +13,7 @@ WORKDIR /scratch
 RUN dpkg -l | awk '{print $2}' | sort > old.txt
 
 RUN apt-get update && apt-get upgrade -y && echo 2017-08-24
-RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl-dev libgeoip-dev libpcap-dev python-dev libcurl4-openssl-dev wget libncurses5-dev ca-certificates zlib1g-dev --no-install-recommends
+RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl1.0-dev libgeoip-dev libpcap-dev python-dev libcurl4-openssl-dev wget libncurses5-dev ca-certificates zlib1g-dev --no-install-recommends
 
 #Checkout bro
 
