@@ -5,7 +5,7 @@ URL=$2
 echo VER is $VER
 echo URL is $URL
 
-cd /tmp/
+cd /usr/src/
 if [ ! -e bro-${VER}.tar.gz ] ; then 
     wget -c $URL
 fi
