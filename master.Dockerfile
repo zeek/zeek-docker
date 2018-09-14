@@ -17,10 +17,8 @@ RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl1.0-
 
 # Build bro
 RUN git clone --recursive git://git.bro.org/bro
-#ADD ./common/install-caf ${WD}/common/install-caf
 ADD ./common/gitbro ${WD}/common/gitbro
-#RUN ${WD}/common/install-caf 0.14.4
-RUN ${WD}/common/gitbro 01a96239e11ce478b2b58e4d1a51fc0a0f3ee1b7
+RUN ${WD}/common/gitbro 114cd2c86097f10e2ea98433ad970f3ca3b1e199
 RUN ln -s /usr/local/bro-master /bro
 
 
