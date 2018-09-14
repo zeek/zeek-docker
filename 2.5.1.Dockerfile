@@ -30,7 +30,7 @@ RUN /usr/local/bin/getgeo.sh
 
 # Make final image
 FROM debian:stretch
-ENV VER 2.5.2
+ENV VER 2.5.1
 #install runtime dependencies
 RUN apt-get update \
     && apt-get -y install --no-install-recommends libpcap0.8 libssl1.0.2 libgeoip1 python2.7-minimal \
