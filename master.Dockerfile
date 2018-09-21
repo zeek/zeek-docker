@@ -10,15 +10,15 @@ ENV WD /scratch
 RUN mkdir ${WD}
 WORKDIR /scratch
 
-RUN apt-get update && apt-get upgrade -y && echo 2018-03-02
-RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl1.0-dev libgeoip-dev libpcap-dev python-dev libcurl4-openssl-dev wget libncurses5-dev ca-certificates zlib1g-dev --no-install-recommends
+RUN apt-get update && apt-get upgrade -y && echo 2019-09-21
+RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl1.0-dev libmaxminddb-dev libpcap-dev python-dev libcurl4-openssl-dev wget libncurses5-dev ca-certificates zlib1g-dev --no-install-recommends
 
 #Checkout bro
 
 # Build bro
 RUN git clone --recursive git://git.bro.org/bro
 ADD ./common/gitbro ${WD}/common/gitbro
-RUN ${WD}/common/gitbro 114cd2c86097f10e2ea98433ad970f3ca3b1e199
+RUN ${WD}/common/gitbro f7da111d1cab58dd1ad7ee421d321a5e7f0eb9ab
 RUN ln -s /usr/local/bro-master /bro
 
 
@@ -26,8 +26,8 @@ RUN ln -s /usr/local/bro-master /bro
 
 FROM debian:stretch as geogetter
 RUN apt-get update && apt-get -y install wget ca-certificates --no-install-recommends
-ADD ./common/getgeo.sh /usr/local/bin/getgeo.sh
-RUN /usr/local/bin/getgeo.sh
+ADD ./common/getmmdb.sh /usr/local/bin/getmmdb.sh
+RUN /usr/local/bin/getmmdb.sh
 
 
 # Make final image
@@ -35,7 +35,7 @@ FROM debian:stretch
 ENV VER master
 #install runtime dependencies
 RUN apt-get update \
-    && apt-get -y install --no-install-recommends libpcap0.8 libssl1.0.2 libgeoip1 python2.7-minimal \
+    && apt-get -y install --no-install-recommends libpcap0.8 libssl1.0.2 libmaxminddb0 python2.7-minimal \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /usr/local/bro-${VER} /usr/local/bro-master
