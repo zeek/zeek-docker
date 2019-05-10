@@ -1,6 +1,7 @@
 #!/bin/bash -e
 VER=$1
 URL=$2
+BUILD_TYPE=${3-Release}
 
 echo VER is $VER
 echo URL is $URL
@@ -13,5 +14,5 @@ if [ ! -d bro-${VER} ]; then
     tar xvzf bro-${VER}.tar.gz
 fi
 cd bro-${VER}
-./configure --prefix=/usr/local/bro-${VER}
+./configure --prefix=/usr/local/bro-${VER} --build-type="${BUILD_TYPE}"
 make -j4 install
