@@ -18,7 +18,7 @@ RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl1.0-
 # Build bro
 RUN git clone --recursive git://git.bro.org/bro
 ADD ./common/gitbro ${WD}/common/gitbro
-RUN ${WD}/common/gitbro f7da111d1cab58dd1ad7ee421d321a5e7f0eb9ab
+RUN ${WD}/common/gitbro 1dd0b2e2923f52d5c436df95e7cbcbb789bb33fa Debug
 RUN ln -s /usr/local/bro-master /bro
 
 
@@ -33,6 +33,7 @@ RUN /usr/local/bin/getmmdb.sh
 # Make final image
 FROM debian:stretch
 ENV VER master
+ENV PATH /bro/bin/:$PATH
 #install runtime dependencies
 RUN apt-get update \
     && apt-get -y install --no-install-recommends libpcap0.8 libssl1.0.2 libmaxminddb0 python2.7-minimal \
@@ -44,7 +45,6 @@ COPY --from=geogetter /usr/share/GeoIP/* /usr/share/GeoIP/
 RUN ln -s /usr/local/bro-${VER} /bro
 ADD ./common/bro_profile.sh /etc/profile.d/bro.sh
 
-env PATH /bro/bin/:$PATH
 
 #install bro-pkg
 RUN pip install bro-pkg

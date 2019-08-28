@@ -1,5 +1,6 @@
 #!/bin/bash -e
 VER=$1
+BUILD_TYPE=${2-Release}
 
 cd bro
 git pull
@@ -9,6 +10,6 @@ git submodule foreach --recursive git reset --hard
 git checkout .
 git submodule foreach --recursive git submodule update
 git submodule foreach --recursive git checkout .
-./configure --prefix=/usr/local/bro-master
+./configure --prefix=/usr/local/bro-master --build-type="${BUILD_TYPE}"
 make
 make install
