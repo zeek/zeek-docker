@@ -20,7 +20,7 @@ ENV VER 2.5.2
 #ADD ./common/install-caf ${WD}/common/install-caf
 #RUN ${WD}/common/install-caf 0.14.4
 ADD ./common/buildbro ${WD}/common/buildbro
-RUN ${WD}/common/buildbro ${VER} http://www.bro.org/downloads/bro-${VER}.tar.gz
+RUN ${WD}/common/buildbro bro ${VER}
 
 # get geoip data
 

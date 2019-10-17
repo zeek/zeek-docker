@@ -18,7 +18,7 @@ RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl1.0-
 # Build bro
 ENV VER 2.6.3
 ADD ./common/buildbro ${WD}/common/buildbro
-RUN ${WD}/common/buildbro ${VER} http://www.bro.org/downloads/bro-${VER}.tar.gz
+RUN ${WD}/common/buildbro bro ${VER}
 
 # get geoip data
 

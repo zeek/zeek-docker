@@ -10,15 +10,15 @@ ENV WD /scratch
 RUN mkdir ${WD}
 WORKDIR /scratch
 
-RUN apt-get update && apt-get upgrade -y && echo 2018-11-29
+RUN apt-get update && apt-get upgrade -y && echo 2018-03-02
 RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl1.0-dev libmaxminddb-dev libpcap-dev python-dev libcurl4-openssl-dev wget libncurses5-dev ca-certificates zlib1g-dev --no-install-recommends
 
 #Checkout bro
 
 # Build bro
-ENV VER 2.6.3
+ENV VER 3.0.0
 ADD ./common/buildbro ${WD}/common/buildbro
-RUN ${WD}/common/buildbro bro ${VER}
+RUN ${WD}/common/buildbro zeek ${VER} Debug
 
 # get geoip data
 
@@ -30,16 +30,23 @@ RUN /usr/local/bin/getmmdb.sh
 
 # Make final image
 FROM debian:stretch
-ENV VER 2.6.3
+ENV VER 3.0.0
+ENV PATH /zeek/bin/:$PATH
 #install runtime dependencies
 RUN apt-get update \
-    && apt-get -y install --no-install-recommends libpcap0.8 libssl1.0.2 libmaxminddb0 python2.7-minimal \
+    && apt-get -y install --no-install-recommends libpcap0.8 libssl1.0.2 libmaxminddb0 \
+    python2.7-minimal python-pip python-setuptools python-wheel git \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /usr/local/bro-${VER} /usr/local/bro-${VER}
+COPY --from=builder /usr/src/zeek-${VER} /usr/src/zeek-${VER}
+COPY --from=builder /usr/local/zeek-${VER} /usr/local/zeek-${VER}
 COPY --from=geogetter /usr/share/GeoIP/* /usr/share/GeoIP/
-RUN ln -s /usr/local/bro-${VER} /bro
-ADD ./common/bro_profile.sh /etc/profile.d/bro.sh
+RUN ln -s /usr/local/zeek-${VER} /bro
+RUN ln -s /usr/local/zeek-${VER} /zeek
+ADD ./common/bro_profile.sh /etc/profile.d/zeek.sh
 
-env PATH /bro/bin/:$PATH
+#install bro-pkg
+RUN pip install bro-pkg
+RUN bro-pkg autoconfig
+
 CMD /bin/bash -l

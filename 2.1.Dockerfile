@@ -22,7 +22,7 @@ RUN apt-get -y install file libmagic-dev
 ENV VER 2.1
 RUN cd /tmp && wget http://www.bro.org/downloads/bro-${VER}.tar.gz --no-check-certificate
 ADD ./common/buildbro ${WD}/common/buildbro
-RUN ${WD}/common/buildbro ${VER} http://www.bro.org/downloads/bro-${VER}.tar.gz
+RUN ${WD}/common/buildbro bro ${VER}
 RUN ln -s /usr/local/bro-${VER} /bro
 
 # Final setup stuff

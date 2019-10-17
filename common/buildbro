@@ -1,18 +1,20 @@
 #!/bin/bash -e
-VER=$1
-URL=$2
+BRO=$1
+VER=$2
 BUILD_TYPE=${3-Release}
+
+URL=https://www.bro.org/downloads/${BRO}-${VER}.tar.gz
 
 echo VER is $VER
 echo URL is $URL
 
 cd /usr/src/
-if [ ! -e bro-${VER}.tar.gz ] ; then 
+if [ ! -e ${BRO}-${VER}.tar.gz ] ; then 
     wget -c $URL
 fi
-if [ ! -d bro-${VER} ]; then
-    tar xvzf bro-${VER}.tar.gz
+if [ ! -d ${BRO}-${VER} ]; then
+    tar xvzf ${BRO}-${VER}.tar.gz
 fi
-cd bro-${VER}
-./configure --prefix=/usr/local/bro-${VER} --build-type="${BUILD_TYPE}"
+cd ${BRO}-${VER}
+./configure --prefix=/usr/local/${BRO}-${VER} --build-type="${BUILD_TYPE}"
 make -j4 install

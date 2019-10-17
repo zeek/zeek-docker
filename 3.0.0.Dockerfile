@@ -16,9 +16,9 @@ RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl1.0-
 #Checkout bro
 
 # Build bro
-ENV VER 2.6.3
+ENV VER 3.0.0
 ADD ./common/buildbro ${WD}/common/buildbro
-RUN ${WD}/common/buildbro bro ${VER}
+RUN ${WD}/common/buildbro zeek ${VER}
 
 # get geoip data
 
@@ -30,16 +30,17 @@ RUN /usr/local/bin/getmmdb.sh
 
 # Make final image
 FROM debian:stretch
-ENV VER 2.6.3
+ENV VER 3.0.0
 #install runtime dependencies
 RUN apt-get update \
     && apt-get -y install --no-install-recommends libpcap0.8 libssl1.0.2 libmaxminddb0 python2.7-minimal \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /usr/local/bro-${VER} /usr/local/bro-${VER}
+COPY --from=builder /usr/local/zeek-${VER} /usr/local/zeek-${VER}
 COPY --from=geogetter /usr/share/GeoIP/* /usr/share/GeoIP/
-RUN ln -s /usr/local/bro-${VER} /bro
+RUN ln -s /usr/local/zeek-${VER} /bro
+RUN ln -s /usr/local/zeek-${VER} /zeek
 ADD ./common/bro_profile.sh /etc/profile.d/bro.sh
 
-env PATH /bro/bin/:$PATH
+env PATH /zeek/bin/:$PATH
 CMD /bin/bash -l
