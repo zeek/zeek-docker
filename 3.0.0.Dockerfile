@@ -40,7 +40,7 @@ COPY --from=builder /usr/local/zeek-${VER} /usr/local/zeek-${VER}
 COPY --from=geogetter /usr/share/GeoIP/* /usr/share/GeoIP/
 RUN ln -s /usr/local/zeek-${VER} /bro
 RUN ln -s /usr/local/zeek-${VER} /zeek
-ADD ./common/bro_profile.sh /etc/profile.d/bro.sh
+ADD ./common/bro_profile.sh /etc/profile.d/zeek.sh
 
 env PATH /zeek/bin/:$PATH
 CMD /bin/bash -l
