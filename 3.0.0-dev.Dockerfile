@@ -38,7 +38,6 @@ RUN apt-get update \
     python2.7-minimal python-pip python-setuptools python-wheel git \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY --from=builder /usr/src/zeek-${VER} /usr/src/zeek-${VER}
 COPY --from=builder /usr/local/zeek-${VER} /usr/local/zeek-${VER}
 COPY --from=geogetter /usr/share/GeoIP/* /usr/share/GeoIP/
 RUN ln -s /usr/local/zeek-${VER} /bro
