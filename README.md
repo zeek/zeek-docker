@@ -32,10 +32,9 @@ use the slider to select 8 GB of RAM (6 also works, but use 8 just in case).
 Docker Desktop will restart and then you will be ready to go.
 
 Due to recent changes in the way Maxmind supplies their
-[GeoLite2 Databases](https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases/)
-a (free) license is required to download them.
-
-The steps to obtain the license are described in the blog post above:
+GeoLite2 Databases a (free) license is required to download them.
+The steps to obtain the license are described in the blog post
+[here](https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases/):
 
 1. [Sign up for a MaxMind account](https://www.maxmind.com/en/geolite2/signup) (no purchase required)
 2. Set your password and create a [license key](https://www.maxmind.com/en/accounts/current/license-key)
