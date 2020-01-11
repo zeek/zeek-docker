@@ -6,6 +6,7 @@ FROM debian:stretch as builder
 MAINTAINER Justin Azoff <justin.azoff@gmail.com>
 
 ENV WD /scratch
+ARG MAXMIND_LICENSE_KEY
 
 RUN mkdir ${WD}
 WORKDIR /scratch

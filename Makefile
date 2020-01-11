@@ -1,7 +1,7 @@
 all: $(patsubst %.Dockerfile,build-stamp_%,$(wildcard *.Dockerfile))
 
 build-stamp_%: %.Dockerfile
-	docker build -t broplatform/bro:$(*) -f $< . 
+	docker build --build-arg MAXMIND_LICENSE_KEY -t broplatform/bro:$(*) -f $< . 
 	touch $@
 
 push-stamp_%: build-stamp_%
