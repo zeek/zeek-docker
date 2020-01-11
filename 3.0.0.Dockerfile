@@ -6,7 +6,6 @@ FROM debian:stretch as builder
 MAINTAINER Justin Azoff <justin.azoff@gmail.com>
 
 ENV WD /scratch
-ARG MAXMIND_LICENSE_KEY
 
 RUN mkdir ${WD}
 WORKDIR /scratch
@@ -24,6 +23,7 @@ RUN ${WD}/common/buildbro zeek ${VER}
 # get geoip data
 
 FROM debian:stretch as geogetter
+ARG MAXMIND_LICENSE_KEY
 RUN apt-get update && apt-get -y install wget ca-certificates --no-install-recommends
 ADD ./common/getmmdb.sh /usr/local/bin/getmmdb.sh
 RUN /usr/local/bin/getmmdb.sh
