@@ -33,14 +33,15 @@ main () {
     #
     # Relies on build time environment variable: MAXMIND_LICENSE_KEY
     # to be set.
-    mkdir -p /usr/share/GeoIP/
+
+    LICENSE_KEY=$1
 
     MD5_FILE=checksums.md5
     rm -f $MD5_FILE
     for DB in GeoLite2-ASN GeoLite2-City
     do
-        get_geoip_db $DB tar.gz  $MAXMIND_LICENSE_KEY
-        get_geoip_db $DB tar.gz.md5  $MAXMIND_LICENSE_KEY
+        get_geoip_db $DB tar.gz  $LICENSE_KEY
+        get_geoip_db $DB tar.gz.md5  $LICENSE_KEY
 
         # Create MD5 sum file for cehcking
         cat $DB.tar.gz.md5 >> $MD5_FILE
@@ -57,5 +58,12 @@ main () {
     done
 }
 
+# First argument to this script is the MAXMIND_LICENSE_KEY, otherwise
+# do nothing.
+if [ -z "$1" ]
+    then
+        echo "MAXMIND_LICENSE_KEY not supplied. Skipping DB download."
+    exit 0
+fi
 
-main
+main $1
