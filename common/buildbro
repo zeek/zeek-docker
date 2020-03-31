@@ -3,7 +3,7 @@ BRO=$1
 VER=$2
 BUILD_TYPE=${3-Release}
 
-URL=https://www.bro.org/downloads/${BRO}-${VER}.tar.gz
+URL=https://old.zeek.org/downloads/${BRO}-${VER}.tar.gz
 
 echo VER is $VER
 echo URL is $URL
