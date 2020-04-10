@@ -2,6 +2,7 @@
 #
 # VERSION               0.1
 
+# Checkout and build Zeek
 FROM debian:stretch as builder
 MAINTAINER Justin Azoff <justin.azoff@gmail.com>
 
@@ -13,15 +14,12 @@ WORKDIR /scratch
 RUN apt-get update && apt-get upgrade -y && echo 2018-11-29
 RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl1.0-dev libmaxminddb-dev libpcap-dev python-dev libcurl4-openssl-dev wget libncurses5-dev ca-certificates zlib1g-dev --no-install-recommends
 
-#Checkout bro
-
 # Build bro
 ENV VER 2.6
 ADD ./common/buildbro ${WD}/common/buildbro
 RUN ${WD}/common/buildbro bro ${VER}
 
 # get geoip data
-
 FROM debian:stretch as geogetter
 RUN apt-get update && apt-get -y install wget ca-certificates --no-install-recommends
 ADD ./common/getmmdb.sh /usr/local/bin/getmmdb.sh

@@ -25,7 +25,9 @@ RUN ${WD}/common/buildbro bro ${VER}
 FROM debian:stretch as geogetter
 RUN apt-get update && apt-get -y install wget ca-certificates --no-install-recommends
 ADD ./common/getmmdb.sh /usr/local/bin/getmmdb.sh
+RUN mkdir -p /usr/share/GeoIP
 RUN /usr/local/bin/getmmdb.sh
+RUN touch /usr/share/GeoIP/.notempty
 
 
 # Make final image
