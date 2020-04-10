@@ -20,11 +20,16 @@ ENV VER ${ZEEK_VER}
 ADD ./common/buildbro ${WD}/common/buildbro
 RUN ${WD}/common/buildbro zeek ${VER} ${BUILD_TYPE}
 
+# For testing
+ADD ./common/getmmdb.sh /usr/local/getmmdb.sh
+
 # Get geoip data
 FROM debian:stretch as geogetter
 ARG MAXMIND_LICENSE_KEY
 RUN apt-get update && apt-get -y install wget ca-certificates --no-install-recommends
-ADD ./common/getmmdb.sh /usr/local/bin/getmmdb.sh
+#ADD ./common/getmmdb.sh /usr/local/bin/getmmdb.sh
+# For testing
+COPY --from=builder /usr/local/getmmdb.sh /usr/local/bin/getmmdb.sh
 RUN mkdir -p /usr/share/GeoIP
 RUN /usr/local/bin/getmmdb.sh ${MAXMIND_LICENSE_KEY}
 # This is a workaround for the case where getmmdb.sh does not create any files.
