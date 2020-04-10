@@ -14,7 +14,7 @@ WORKDIR /scratch
 RUN apt-get update && apt-get upgrade -y && echo 2018-11-29
 RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl1.0-dev libmaxminddb-dev libpcap-dev python-dev libcurl4-openssl-dev wget libncurses5-dev ca-certificates zlib1g-dev --no-install-recommends
 
-ARG ZEEK_VER
+ARG ZEEK_VER=3.0.0
 ARG BUILD_TYPE=Release
 ENV VER ${ZEEK_VER}
 ADD ./common/buildbro ${WD}/common/buildbro
@@ -32,7 +32,7 @@ RUN touch /usr/share/GeoIP/.notempty
 
 # Make final image
 FROM debian:stretch
-ARG ZEEK_VER
+ARG ZEEK_VER=3.0.0
 ENV VER ${ZEEK_VER}
 #install runtime dependencies
 RUN apt-get update \
