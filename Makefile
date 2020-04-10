@@ -17,6 +17,5 @@ build-stamp_2.%: 2.%.Dockerfile
 
 # Starting from 3.0.0, we will use a single Dockerfile by passing more build-args
 build-stamp_%:
-	echo $@
 	docker build --build-arg MAXMIND_LICENSE_KEY --build-arg ZEEK_VER=$(*) --build-arg BUILD_TYPE=$(BUILD_TYPE) -t broplatform/bro:$(*) -f Dockerfile . 
 	touch $@
