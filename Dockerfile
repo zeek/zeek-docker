@@ -22,13 +22,15 @@ RUN ${WD}/common/buildbro zeek ${VER} ${BUILD_TYPE}
 
 # For testing
 ADD ./common/getmmdb.sh /usr/local/getmmdb.sh
+ADD ./common/bro_profile.sh /usr/local/bro_profile.sh
 
 # Get geoip data
 FROM debian:stretch as geogetter
 ARG MAXMIND_LICENSE_KEY
 RUN apt-get update && apt-get -y install wget ca-certificates --no-install-recommends
-#ADD ./common/getmmdb.sh /usr/local/bin/getmmdb.sh
+
 # For testing
+#ADD ./common/getmmdb.sh /usr/local/bin/getmmdb.sh
 COPY --from=builder /usr/local/getmmdb.sh /usr/local/bin/getmmdb.sh
 RUN mkdir -p /usr/share/GeoIP
 RUN /usr/local/bin/getmmdb.sh ${MAXMIND_LICENSE_KEY}
@@ -49,7 +51,10 @@ COPY --from=geogetter /usr/share/GeoIP/* /usr/share/GeoIP/
 RUN rm -f /usr/share/GeoIP/.notempty
 RUN ln -s /usr/local/zeek-${VER} /bro
 RUN ln -s /usr/local/zeek-${VER} /zeek
-ADD ./common/bro_profile.sh /etc/profile.d/zeek.sh
+
+# For testing
+#ADD ./common/bro_profile.sh /etc/profile.d/zeek.sh
+COPY --from=builder /usr/local/bro_profile.sh /etc/profile.d/zeek.sh
 
 env PATH /zeek/bin/:$PATH
 CMD /bin/bash -l
