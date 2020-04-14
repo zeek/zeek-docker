@@ -59,6 +59,8 @@ To build your Zeek container, type in the commands below:
     $ cd zeek-docker
     $ make build-stamp_3.0.0
 
+Note: If you want to build a Debug build, you can specify BUILD_TYPE=Debug (default is Release)
+
 That's it! Now watch as the wonders of automation unfold, and your
 Zeek container is built. You should see something like this on your
 terminal console:
