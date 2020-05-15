@@ -11,5 +11,5 @@ git checkout .
 git submodule foreach --recursive git submodule update
 git submodule foreach --recursive git checkout .
 ./configure --prefix=/usr/local/bro-master --build-type="${BUILD_TYPE}"
-make
+make -j $(nproc)
 make install

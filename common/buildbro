@@ -18,4 +18,4 @@ if [ ! -d ${BRO}-${VER} ]; then
 fi
 cd ${BRO}-${VER}
 ./configure --prefix=/usr/local/${BRO}-${VER} --build-type="${BUILD_TYPE}"
-make -j4 install
+make -j $(nproc) install
