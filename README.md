@@ -80,7 +80,7 @@ is available in your local docker registry:
 
     $ docker images  | grep -e broplatform -e REPO
     REPOSITORY       TAG   IMAGE ID     CREATED        SIZE
-    broplatform/bro  3.0.0 5bc774250a9a 8 minutes ago  215MB
+    broplatform/bro  4.0.2 5bc774250a9a 8 minutes ago  215MB
 
 Great! Let's fire it up!
 
@@ -89,7 +89,7 @@ Great! Let's fire it up!
 Run the following command to start your container and access it via an
 interactive bash shell:
 
-    $ docker run -it -v `pwd`:/pcap broplatform/bro:3.0.0 /bin/bash
+    $ docker run -it -v `pwd`:/pcap broplatform/bro:4.0.2 /bin/bash
     root@3535953ccd99:/# which zeek
     /zeek/bin//zeek
 
