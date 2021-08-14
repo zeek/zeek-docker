@@ -57,7 +57,7 @@ Use the following command to clone this repo:
 To build your Zeek container, type in the commands below:
 
     $ cd zeek-docker
-    $ make build-stamp_4.0.2
+    $ make build-stamp_4.0.3
 
 Note: If you want to build a Debug build, you can specify BUILD_TYPE=Debug (default is Release)
 
@@ -71,8 +71,8 @@ terminal console:
     Removing intermediate container c1263b7d2ea3
     ---> 5bc774250a9a
     Successfully built 5bc774250a9a
-    Successfully tagged broplatform/bro:4.0.2
-    touch build-stamp_4.0.2
+    Successfully tagged broplatform/bro:4.0.3
+    touch build-stamp_4.0.3
     $
 
 Once the container has been built, check to make sure the container image
@@ -80,7 +80,7 @@ is available in your local docker registry:
 
     $ docker images  | grep -e broplatform -e REPO
     REPOSITORY       TAG   IMAGE ID     CREATED        SIZE
-    broplatform/bro  4.0.2 5bc774250a9a 8 minutes ago  215MB
+    broplatform/bro  4.0.3 5bc774250a9a 8 minutes ago  215MB
 
 Great! Let's fire it up!
 
@@ -89,7 +89,7 @@ Great! Let's fire it up!
 Run the following command to start your container and access it via an
 interactive bash shell:
 
-    $ docker run -it -v `pwd`:/pcap broplatform/bro:4.0.2 /bin/bash
+    $ docker run -it -v `pwd`:/pcap broplatform/bro:4.0.3 /bin/bash
     root@3535953ccd99:/# which zeek
     /zeek/bin//zeek
 
