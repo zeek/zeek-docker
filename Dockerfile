@@ -14,7 +14,7 @@ WORKDIR /scratch
 RUN apt-get update && apt-get upgrade -y && echo 2021-03-01
 RUN apt-get -y install build-essential git bison flex gawk cmake swig libssl-dev libmaxminddb-dev libpcap-dev python3.9-dev libcurl4-openssl-dev wget libncurses5-dev ca-certificates zlib1g-dev --no-install-recommends
 
-ARG ZEEK_VER=4.0.3
+ARG ZEEK_VER=4.1.0
 ARG BUILD_TYPE=Release
 ENV VER ${ZEEK_VER}
 ADD ./common/buildbro ${WD}/common/buildbro
@@ -39,7 +39,7 @@ RUN touch /usr/share/GeoIP/.notempty
 
 # Make final image
 FROM debian:bullseye
-ARG ZEEK_VER=4.0.3
+ARG ZEEK_VER=4.1.0
 ENV VER ${ZEEK_VER}
 #install runtime dependencies
 RUN apt-get update \
