@@ -8,6 +8,14 @@ to standup a clean Zeek environment in a docker container.
 The automation compiles Zeek from source code and installs it within a
 Docker container.
 
+> **NOTE**
+>
+> These are not the official Zeek project Docker images. If you're
+> looking for these, please grab them from `zeek/zeek`
+> [in Docker Hub](https://hub.docker.com/r/zeek/zeek), see
+> [our documentation](https://docs.zeek.org/en/master/install.html#docker-images) for more information,
+> and go [here](https://github.com/zeek/zeek/tree/master/docker) for the Docker build setup.
+
 ## Install pre-requisites
 
 If installing on Mac OSX, you will require the following.
